@@ -10,7 +10,7 @@
                 <a class="baseButton" href="#home">Home</a>
                 <a class="baseButton" href="#news">News</a>
                 <a class="baseButton" href="#contact">Contact</a>
-                <a class="baseButton" href="#about">About</a>
+                <a class="baseButton" href="#about">About Me</a>
                
             </ul>   
         </div>
