@@ -1,26 +1,56 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style lang="scss">
+body{
+    background-color: transparent !important;
+  
+}
+html{
+  color: black;
+    height: 100%;
+    background-repeat:no-repeat;
+    background-size: cover;
+    background: linear-gradient(135deg, #ED7E97,#ecc9d2,#FDFF8F, #A8ECE7 );
+}
+@keyframes TransitioningBackground {
+  0% {
+    background-position: 1% 0%;
+  }
+  50% {
+    background-position: 99% 100%;
+  }
+  100% {
+    background-position: 1% 0%;
+  }
+}
+.baseButton  {
+  font-size: 1rem;
+  font-weight: 600;
+  color: black;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 200px;
+  height: 60px;
+  border-width: 0;
+  border-radius: 15px;
+  background-size: 400% 400%;
+  animation: TransitioningBackground 1.5s ease infinite;
+  transition: 0.6s;
+  &:hover {
+    background-image: (linear-gradient(to left, #FDFF8F, #A8ECE7));
+    transform: scale(1.1);
+    box-shadow: 0px 0px 5px black;
+    cursor: pointer;
+  }
 }
 </style>
