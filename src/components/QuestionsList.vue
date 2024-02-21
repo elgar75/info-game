@@ -1,21 +1,26 @@
 <template>
-    <div class="screen" v-if="questions">
-        <div class="question-container">
+    <div class="screen mt-5 d-flex flex-column align-items-center container" v-if="questions">
+        <div class="question-container ">
             <img class="brainimage" style="width: 80px;left: -40px;top: -50px;position: absolute; "
                 src="../assets/img copy.svg" />
-            <div class="question-second-div" v-html="questions[currentQuestionIndex].question"></div>
+            <div class="question-second-div  p-3  p-md-4 p-lg-5 fw-bold" v-html="questions[currentQuestionIndex].question">
+            </div>
         </div>
 
-        <div class="options-container">
-            <button :class="optionClass(option)" v-for="(option) in  questions[currentQuestionIndex].options" :key="option"
-                :disabled="questions[currentQuestionIndex].user_answer" v-on:click="radiochoise = option" v-html="option"></button>
+        <div class="options-container ">
+            <button class="p-2 p-md-3 p-lg-4" :class="optionClass(option)"
+                v-for="(option) in  questions[currentQuestionIndex].options" :key="option"
+                :disabled="questions[currentQuestionIndex].user_answer" v-on:click="radiochoise = option"
+                v-html="option"></button>
 
         </div>
 
-        <div class="buttons-container">
-            <img class="next-icon" @click="nextQuestion" src="../assets/next.svg" style="visibility: hidden;" />
+        <div class="mt-5">
             <button class="submitbutton" @click="submitAnswer">Submit</button>
-            <img class="next-icon" @click="nextQuestion" src="../assets/next.svg" />
+        </div>
+        <div class="submitbutton mt-3" @click="nextQuestion">
+            Next
+            <i class="bi bi-arrow-right"></i>
         </div>
 
     </div>
@@ -26,50 +31,13 @@
 <script>
 import axios from 'axios';
 import BaseSpinner from '../ui/BaseSpinner.vue';
-// eslint-disable-next-line
+
 function shuffle(array) {
     let temp = array.map(x => [x, Math.floor(Math.random() * 10000)])
     temp = temp.sort((x, y) => x[1] - y[1])
     return temp.map(x => x[0])
 }
-// let questions = [
-//     {
-//         "question": "how old are you1?",
-//         "options": ["10", "30", "25", "18"],
-//         "answer": "10",
-//         "id": "1"
-//     },
-//     {
-//         "question": "how old are you2?",
-//         "options": ["10", "30", "25", "18"],
-//         "answer": "10",
-//         "id": "2"
-//     },
-//     {
-//         "question": "how old are you3?",
-//         "options": ["10", "30", "25", "18"],
-//         "answer": "10",
-//         "id": "3"
-//     },
-//     {
-//         "question": "how old are you4?",
-//         "options": ["10", "30", "25", "18"],
-//         "answer": "10",
-//         "id": "4"
-//     },
-//     {
-//         "question": "how old are you5?",
-//         "options": ["10", "30", "25", "18"],
-//         "answer": "10",
-//         "id": "5"
-//     },
-//     {
-//         "question": "how old are you6?",
-//         "options": ["10", "30", "25", "18"],
-//         "answer": "10",
-//         "id": "6"
-//     },
-// ]
+
 export default {
     components: {
         BaseSpinner,
@@ -135,17 +103,12 @@ export default {
 
 <style lang="scss" scoped>
 .screen {
-    margin-top: 80px;
-    display: flex;
     background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .question-container {
-    width: 700px;
-    height: 200px;
+    max-width: 60%;
+    max-height: 13rem;
     border-radius: 10px;
     border-width: 1px;
     background-size: 400% 400%;
@@ -189,21 +152,15 @@ export default {
 // }
 
 .question-second-div {
-    border-color: black;
-    font-weight: 10px;
     text-align: center;
-    padding-top: 50px;
-    font-size: 2rem;
 }
 
 .option-btn {
-    width: 280px;
-    height: 50px;
     border-radius: 10px;
     border-width: 1px;
     margin-top: 44px;
-    margin-right: 40px;
-    margin-left: 40px;
+    margin-right: 20px;
+    margin-left: 20px;
     font-weight: bold;
     background-color: white;
     opacity: 0.6;
@@ -247,20 +204,13 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-
+    justify-items: stretch;
+    margin-right: 20px;
 }
-
-.buttons-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 80px;
-    width: 700px
-}
-
 .submitbutton {
     background: linear-gradient(135deg, #c84f9e, #9d1186);
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -277,11 +227,5 @@ export default {
         transition: 0.6s;
         transform: scale(1.1);
     }
-}
-
-.next-icon {
-    width: 80px;
-    height: 80px;
-    text-align: right;
 }
 </style>

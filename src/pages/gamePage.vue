@@ -4,7 +4,7 @@
       
       <QuestionsList @game-IsFinishing="Finishing"></Questionslist>
     </template>
-    <div class="div-container" v-if="gameState=='finished'" >
+    <div class="div-container mx-3 mt-lg-5" v-if="gameState=='finished'" >
       <div class="second-container">
         <div style="display: flex; justify-content: center; min-height: 150px;">
         <img src="../assets/star.svg"  style="width: 100px; align-self:flex-end;" />
@@ -91,6 +91,4 @@ import QuestionsList from '../components/QuestionsList.vue';
   margin-top: 70px;
   text-decoration: none;
 }
-
-
 </style>
