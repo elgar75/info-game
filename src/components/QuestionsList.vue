@@ -14,15 +14,23 @@
                 v-html="option"></button>
 
         </div>
+        <div class="row justify-content-center justify-content-evenly mt-5 p-5">
+            <div class="row">
+                <button :disabled="questions[currentQuestionIndex].user_answer" class="submitbutton button fs-4 px-5 py-3"
+                    @click="submitAnswer">Submit</button>
+            </div>
+            <div class="row mt-2">
+                <div v-if="currentQuestionIndex !== 0" class="button me-1 col py-3" @click="backQuestion">
+                    <i class="bi bi-arrow-left"></i>
+                    Back
+                </div>
+                <div class="button ms-1 col py-3" @click="nextQuestion">
+                    Next
+                    <i class="bi bi-arrow-right"></i>
+                </div>
 
-        <div class="mt-5">
-            <button class="submitbutton" @click="submitAnswer">Submit</button>
+            </div>
         </div>
-        <div class="submitbutton mt-3" @click="nextQuestion">
-            Next
-            <i class="bi bi-arrow-right"></i>
-        </div>
-
     </div>
     <div v-else>
         <BaseSpinner></BaseSpinner>
@@ -84,6 +92,12 @@ export default {
                 this.$emit('game-IsFinishing', this.score);
             }
         },
+        backQuestion() {
+            if (this.currentQuestionIndex !== 0) {
+                this.currentQuestionIndex--;
+            }
+
+        },
         getvalue(e) {
             const buttonValue = e.target.value;
             console.log(buttonValue)
@@ -93,8 +107,6 @@ export default {
             if (this.questions[this.currentQuestionIndex].answer === this.radiochoise) {
                 this.score++;
             }
-            // console.log(this.score)
-            // console.log(this.radiochoise, this.questions[this.currentQuestionIndex].answer)
         }
 
     }
@@ -118,38 +130,6 @@ export default {
     transform: scale(1.1);
     box-shadow: 0px 0px 5px black;
 }
-
-// .brainimage {
-//     animation: Brainimage 20s ease infinite;
-// }
-
-// @keyframes Brainimage {
-//     0% {
-//         top: -50px;
-//         left: -50px;
-//     }
-
-//     25% {
-//         top: -50px;
-//         left: 650px;
-//     }
-
-//     50% {
-//         top: 150px;
-//         left: 650px;
-//     }
-
-//     75% {
-//         left: -50px;
-//         top: 150px;
-//     }
-//     100% {
-//         top: -50px;
-//         left: -50px;
-
-//     }
-
-// }
 
 .question-second-div {
     text-align: center;
@@ -207,19 +187,17 @@ export default {
     justify-items: stretch;
     margin-right: 20px;
 }
-.submitbutton {
+
+.button {
     background: linear-gradient(135deg, #c84f9e, #9d1186);
     border: none;
     border-radius: 10px;
     color: white;
-    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 20px;
     font-weight: bolder;
     cursor: pointer;
-    width: 250px;
     animation: TransitioningBackground 1.5s ease infinite;
 
     &:hover {
@@ -227,5 +205,15 @@ export default {
         transition: 0.6s;
         transform: scale(1.1);
     }
+}
+
+.submitbutton {
+    // width: 250px;
+    // font-size: 20px;
+    // padding: 15px 32px;
+}
+
+.button:disabled {
+    background: gray
 }
 </style>
