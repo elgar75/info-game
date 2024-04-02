@@ -3,7 +3,8 @@
         <div class="question-container ">
             <img class="brainimage" style="width: 80px;left: -40px;top: -50px;position: absolute; "
                 src="../assets/img copy.svg" />
-            <div class="question-second-div  p-3  p-md-4 p-lg-5 fw-bold" v-html="questions[currentQuestionIndex].question">
+            <div class="question-second-div  p-3  p-md-4 p-lg-5 fw-bold"
+                v-html="questions[currentQuestionIndex].question">
             </div>
         </div>
 
@@ -16,8 +17,8 @@
         </div>
         <div class="row justify-content-center justify-content-evenly mt-5 p-5">
             <div class="row">
-                <button :disabled="questions[currentQuestionIndex].user_answer" class="submitbutton button fs-4 px-5 py-3"
-                    @click="submitAnswer">Submit</button>
+                <button :disabled="questions[currentQuestionIndex].user_answer"
+                    class="submitbutton button fs-4 px-5 py-3" @click="submitAnswer">Submit</button>
             </div>
             <div class="row mt-2">
                 <div v-if="currentQuestionIndex !== 0" class="button me-1 col py-3" @click="backQuestion">
@@ -89,18 +90,15 @@ export default {
             this.currentQuestionIndex++;
             this.radiochoise = null;
             if (this.questions.length === this.currentQuestionIndex) {
-                this.$emit('game-IsFinishing', this.score);
+                const percent = (this.score * 3) / this.questions.length
+                this.$emit('game-IsFinishing', { score: this.score, percent: percent });
+
             }
         },
         backQuestion() {
             if (this.currentQuestionIndex !== 0) {
                 this.currentQuestionIndex--;
             }
-
-        },
-        getvalue(e) {
-            const buttonValue = e.target.value;
-            console.log(buttonValue)
         },
         submitAnswer() {
             this.questions[this.currentQuestionIndex].user_answer = this.radiochoise
@@ -205,12 +203,6 @@ export default {
         transition: 0.6s;
         transform: scale(1.1);
     }
-}
-
-.submitbutton {
-    // width: 250px;
-    // font-size: 20px;
-    // padding: 15px 32px;
 }
 
 .button:disabled {
